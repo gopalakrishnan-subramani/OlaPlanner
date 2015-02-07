@@ -6,6 +6,8 @@ angular.module('starter.google.distance', [])
   //var destinationB = new google.maps.LatLng(50.087, 14.421);
    
  this.getDistance = function(origin, destination) {
+   //alert('called'); //
+
    var deferred = $q.defer();
     var service = new google.maps.DistanceMatrixService();
     service.getDistanceMatrix(
@@ -21,31 +23,30 @@ angular.module('starter.google.distance', [])
           alert('Error was: ' + status);
           return deferred.reject(error);
         } else {
-           alert('got');
+          // alert('got');
 
 
            var origins = response.originAddresses;
             var destinations = response.destinationAddresses;
              
+            var distanceResults = [];
              
             for (var i = 0; i < origins.length; i++) {
               var results = response.rows[i].elements;
                
               for (var j = 0; j < results.length; j++) {
-                console.log(JSON.stringify(results[i]));
-
-                
+                console.log(JSON.stringify(results[j]));
+                distanceResults.push(results[j]);
               }
             }
           
-
-
-
-
-          return deferred.resolve(response);
+          return deferred.resolve(distanceResults);
         }
       }
     );
+
+
+    return deferred.promise;
   }
 
  });
