@@ -1,1 +1,26 @@
-/* Empty. Add your own CSS if you like */
+/* Trip Details Page */
+ul#tripD {
+    float: left;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+ul#tripD a {
+    float: left;
+    width: auto;
+    text-decoration: none;
+    color: white;
+    background-color: purple;
+    padding: 0.2em 0.6em;
+    border-right: 1px solid white;
+}
+
+ul#tripD a:hover {
+    background-color: fuchsia;
+}
+
+ul#tripD li {
+    display: inline;
+}

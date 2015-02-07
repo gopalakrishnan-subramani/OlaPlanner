@@ -1,7 +1,30 @@
 <ion-view view-title="{{plan.name}}">
-
   <ion-content class="padding">
-  	 <h2>Trip Details</h2>
-  </ion-content>
-  
+  	 <h4>Possible Routes</h4>
+		 <div class="row">
+        <div class="col-25">Distance</div>
+        <div class="col-25">Duration</div>
+        <div class="col-25">Cost</div>
+    </div>
+
+		<div class="row" ng-repeat="data in matrixData">
+        <div class="col-25">
+          {{data["distance"]["text"]}}
+        </div>
+        <div class="col-25">
+          {{data["duration"]["text"]}}
+        </div>
+        <div class="col-25">
+          cost
+        </div>
+    </div>
+
+  	 <!-- TABS -->
+		<ul id="tripD" style="margin-top:40px;">
+		<li><a href="#">Hotels</a></li>
+		<li><a href="#">Police Stattions</a></li>
+		<li><a href="#">Hospitals</a></li>
+		<li><a href="#">Atms</a></li>
+		</ul>
+  </ion-content>  
 </ion-view>
