@@ -74,7 +74,7 @@ angular.module('starter.tripDetails', [])
 	  var request = {
 	    location: pyrmont,
 	    radius: 500,
-	    types: ['store']
+	    types: ['bank', 'doctor', 'restaurant', 'pharmacy', 'police']
 	  };
 
 	  infowindow = new google.maps.InfoWindow();
@@ -91,10 +91,21 @@ angular.module('starter.tripDetails', [])
 	}
 
 	function createMarker(place) {
+
+		var image = {
+      url: place.icon,
+      size: new google.maps.Size(71, 71),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(17, 34),
+      scaledSize: new google.maps.Size(25, 25)
+    };
+
 	  var placeLoc = place.geometry.location;
 	  var marker = new google.maps.Marker({
 	    map: map,
-	    position: place.geometry.location
+	    icon: image,
+	    position: place.geometry.location,
+	    title: place.name
 	  });
 	}
 })
@@ -110,13 +121,7 @@ angular.module('starter.tripDetails', [])
 
 		geocoder = new google.maps.Geocoder();
 		geocoder.geocode( { 'address': address}, function(results, status) {
-	    if (status == google.maps.GeocoderStatus.OK) {
-	      /*map.setCenter(results[0].geometry.location);
-	      var marker = new google.maps.Marker({
-	          map: map,
-	          position: results[0].geometry.location
-	      });*/
-				console.log(results[0].geometry.location);
+	    if (status == google.maps.GeocoderStatus.OK) {				
 				deferred.resolve(results[0].geometry.location);
 	    } else {
 	       deferred.reject(status);
@@ -146,7 +151,7 @@ angular.module('starter.tripDetails', [])
 		destination: ""
 	};
 
-	//Parse JSON response coming from service
+ 	//Parse JSON response coming from service
 	function parseResponse (response) {
 		var _rows = response.rows,
 				length = _rows.length;

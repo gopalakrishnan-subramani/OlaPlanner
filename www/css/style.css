@@ -68,3 +68,8 @@ li:nth-child(odd) {
     width: 450px;
     height: 450px;
 }
+
+#map-canvas {
+    width: 90%;
+    height: 600px;
+}
