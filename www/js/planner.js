@@ -66,17 +66,61 @@ angular.module('starter.planner', [])
   }
 }]) 
 
-.controller('PlannerCtrl', function($scope, Planner) {
+.controller('PlannerCtrl', function($scope, Planner, DataStore) {
   $scope.plans = Planner.all();
 })
 
 
-.controller('PlannerDetailsCtrl', function($scope, $stateParams, Planner) {
+.controller('PlannerDetailsCtrl', function($scope, $stateParams, $ionicPopup, Planner, DataStore) {
   $scope.plan = Planner.get($stateParams.planId);
+
+  $scope.trips = [{id: "D343ffd", source: 'Airport, Bangalore', destination: 'Le Meridien Bangalore'},
+                  {id: "E43ffD", source: 'Le Meridien Bangalore', destination: 'Airport, Bangalore'}
+                  ];
+
+  $scope.addTrip = function() {
+     // An elaborate, custom popup
+     var data = {
+        source: 'Bangalore',
+        destination: 'Mysore'
+     };
+
+
+     $scope.data = data;
+
+
+      var myPopup = $ionicPopup.show({
+        templateUrl: 'tripedit.html',
+        title: 'Trip Details',
+        subTitle: 'Please use normal things',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel' },
+          {
+            text: '<b>Save</b>',
+            type: 'button-positive',
+            onTap: function(e) {
+              //if (!$scope.data.wifi) {
+                //don't allow the user to close unless he enters wifi password
+                //e.preventDefault();
+              //} else {
+                return $scope.data;
+              //}
+            }
+          }
+        ]
+      });
+
+      myPopup.then(function(res) {
+        console.log('Tapped!', res);
+      });
+
+  };
+
 })
 
 
-.controller('PlannerEditCtrl', function($scope, $stateParams, DistanceMatrix, Planner) {
+.controller('PlannerEditCtrl', function($scope, $stateParams, DistanceMatrix, Planner, DataStore) {
   //Store the source and destination data entered by user
   $scope.planSourceDes = {};
   $scope.distanceMatRes = {};

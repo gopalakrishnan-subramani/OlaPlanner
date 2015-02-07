@@ -4,12 +4,26 @@ This template loads for the 'tab.friend-detail' state (app.js)
 The FriendsCtrl pulls data from the Friends service (service.js)
 The Friends service returns an array of friend data
 -->
+
+<script id="tripedit.html" type="text/ng-template">
+	<span>Source</span>
+ 	<input type="text" ng-model="data.source">
+ 	<span>Destination</span>
+ 	<input type="text" ng-model="data.destination"> 	 
+</script>
+
 <ion-view view-title="{{plan.name}}">
+
   <ion-content class="padding">
-    <img ng-src="{{plan.face}}" style="width: 64px; height: 64px">
-    <h3>Notes</h3>
-    <p>
-      {{plan.notes}}
-    </p>
+  	<button href="#" ng-click="addTrip()">Add Trip</button>
+    <h3>Trips</h3>
+   
+   <ion-list>
+      <ion-item class="item-avatar" ng-repeat="trip in trips" type="item-text-wrap" href="#/tab/planner/trip/{{plan.id}}/{{trip.id}}">
+         
+        <h2>{{trip.source}} --> {{trip.destination}}</h2>
+      </ion-item>
+    </ion-list>
+
   </ion-content>
 </ion-view>

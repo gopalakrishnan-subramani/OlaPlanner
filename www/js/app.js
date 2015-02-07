@@ -99,7 +99,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     })
 
     .state('tab.trip-details', {
-      url: '/tripDetails/:tripId',
+      url: '/planner/trip/:planId/:tripId',
       views: {
         'tab-planner': {
           templateUrl: 'templates/trip-details.html',
