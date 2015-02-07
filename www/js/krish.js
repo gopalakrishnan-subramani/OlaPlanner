@@ -21,7 +21,28 @@ angular.module('starter.krish', [])
   $scope.friend = Friends.get($stateParams.friendId);
 })
 */
-.controller('AccountCtrl', function($scope) {
+.controller('AccountCtrl', function($scope, DataStore) {
+  if (DataStore) {
+    
+
+      DataStore.getPlans().then(function(plans){
+        plans.each(function(plan){
+          console.log(plan.get('source'));
+        });
+      });
+    // Create a new instance of that class.
+        
+
+
+    DataStore.getPlan("C1wwO7sWGb").then(function (plan) {
+
+    },
+    function(err) {
+      alert("Error " + err);
+    }
+    );
+  }
+
   $scope.settings = {
     enableFriends: true
   };
