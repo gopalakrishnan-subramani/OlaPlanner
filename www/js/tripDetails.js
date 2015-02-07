@@ -59,29 +59,44 @@ angular.module('starter.tripDetails', [])
 	var _hotels,
 			_hospitals,
 			_police,
-			_atms;
+			_atms,
+			map,
+			infowindow;
 
-	function initialize() {
+	this.createMap = function (_lat, _long, type) {
+	  var pyrmont = new google.maps.LatLng(_lat, _long);
 
+	  map = new google.maps.Map(document.getElementById('map-canvas'), {
+	    center: pyrmont,
+	    zoom: 15
+	  });
+
+	  var request = {
+	    location: pyrmont,
+	    radius: 500,
+	    types: ['store']
+	  };
+
+	  infowindow = new google.maps.InfoWindow();
+	  var service = new google.maps.places.PlacesService(map);
+	  service.nearbySearch(request, callback);
 	}
 
 	function callback(results, status) {
-
+	  if (status == google.maps.places.PlacesServiceStatus.OK) {
+	    for (var i = 0; i < results.length; i++) {
+	      createMarker(results[i]);
+	    }
+	  }
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+	function createMarker(place) {
+	  var placeLoc = place.geometry.location;
+	  var marker = new google.maps.Marker({
+	    map: map,
+	    position: place.geometry.location
+	  });
+	}
 })
 .service('Geoencoding', ['$q', function ($q) {
 	var deferred;
@@ -113,7 +128,7 @@ angular.module('starter.tripDetails', [])
 	};
 
 }])
-.controller('TripDetailsCtrl', ['$scope', '$http', 'DistanceServiceMatrix', 'Cost', 'DataStore','$stateParams', 'Geoencoding', function ($scope, $http, DistanceServiceMatrix, Cost, DataStore, $stateParams, Geoencoding) {
+.controller('TripDetailsCtrl', ['$scope', '$http', 'DistanceServiceMatrix', 'Cost', 'DataStore','$stateParams', 'Geoencoding', 'PlacesNearBy', function ($scope, $http, DistanceServiceMatrix, Cost, DataStore, $stateParams, Geoencoding, PlacesNearBy) {
 
 	$scope.matrixData;
 	$scope.latVal;
@@ -156,6 +171,10 @@ angular.module('starter.tripDetails', [])
 		Geoencoding.getLatLong(_inputs.destination).then(function (latLong) {
 			$scope.latVal = latLong.k;
 			$scope.longVal = latLong.D;
+
+			//Create maps
+			PlacesNearBy.createMap(latLong.k, latLong.D, 'hotel');
+
 		});
 
 		DistanceServiceMatrix.calculateDistances(_inputs).then(function (response) {
