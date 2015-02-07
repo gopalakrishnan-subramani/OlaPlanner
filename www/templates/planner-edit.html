@@ -7,5 +7,20 @@ The Friends service returns an array of friend data
 <ion-view view-title="{{plan.name}}">
   <ion-content class="padding">
      <h2>New Plan {{message}}</h2>
+			<form ng-submit="createPlan()">
+			  <div class="list">
+			    <label class="item item-input">
+			      <span class="input-label">Source</span>
+			      <input type="text" ng-model="planSourceDes.sourcename">
+			    </label>
+			    <label class="item item-input">
+			      <span class="input-label">Destination</span>
+			      <input type="text" ng-model="planSourceDes.destinationname">
+			    </label>
+			    <label class="item">
+			      <button class="button button-block button-positive" type="submit">Log in</button>
+			    </label>
+			  </div>
+			</form>   
   </ion-content>
 </ion-view>
