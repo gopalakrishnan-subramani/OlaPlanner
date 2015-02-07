@@ -1,12 +1,12 @@
 <ion-view view-title="Planner">
   <ion-content>
-  	<a href="#tab/planner/new">New Plan</a>
+  	<a href="#tab/planner/new" class="button button-balanced">New Plan</a>
     <ion-list>
       <ion-item class="item-avatar" ng-repeat="plan in plans.models" type="item-text-wrap" >
-         
+        <img ng-src="img/plan.png" style="width:50px; height:50px; "> 
         <a href="#/tab/planner/{{plan.id}}"><h2>{{plan.get('name')}}</h2></a>
         <br />
-        <button ng-click="deletePlan(plan)">Delete</button>
+        <button ng-click="deletePlan(plan)" class="button button-assertive">Delete</button>
       </ion-item>
     </ion-list>
   </ion-content>

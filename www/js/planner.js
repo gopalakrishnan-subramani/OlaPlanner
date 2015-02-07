@@ -1,6 +1,10 @@
 angular.module('starter.planner', [])
-
-
+.service('PlaceAutoComplete', function () {
+  this.initialize = function () {
+    var input = /** @type {HTMLInputElement} */(
+      document.getElementById('pac-input'));
+  };
+})
 .controller('PlannerCtrl', function($scope, DataStore) {
   console.log('refresh plans');
 
@@ -27,7 +31,7 @@ angular.module('starter.planner', [])
 })
 
 
-.controller('PlannerDetailsCtrl', function($scope, $cordovaDatePicker, $stateParams, $ionicPopup, Distance, DataStore) {
+.controller('PlannerDetailsCtrl', function($scope, $cordovaDatePicker, $stateParams, $ionicPopup, Distance, DataStore, PlaceAutoComplete) {
   var plan = DataStore.newPlan();
   var data = {name: 'new plan'};
 
@@ -199,7 +203,7 @@ angular.module('starter.planner', [])
                 },
 
               error: function(error) {
-                alert('error ' + error);
+                //alert('error ' + error);
               }
             });
 
@@ -234,5 +238,6 @@ angular.module('starter.planner', [])
      }
   };
 
-})
-;
+  PlaceAutoComplete.initialize();
+
+});

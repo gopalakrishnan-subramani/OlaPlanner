@@ -73,3 +73,13 @@ li:nth-child(odd) {
     width: 90%;
     height: 600px;
 }
+
+.button {
+    margin: 3px 5px 3px !important;
+}
+
+a {
+    text-decoration: none;
+    text-transform: capitalize;
+    color: #000;
+}
