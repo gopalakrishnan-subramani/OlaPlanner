@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.locations', 'starter.planner', 
-                          'starter.krish'])
+                          'starter.krish', 'starter.database'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -87,7 +87,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       }
     })
-    
+
     .state('tab.plan-detail', {
       url: '/planner/:planId',
       views: {
