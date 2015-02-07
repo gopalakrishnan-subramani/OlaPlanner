@@ -21,27 +21,16 @@ angular.module('starter.krish', [])
   $scope.friend = Friends.get($stateParams.friendId);
 })
 */
-.controller('AccountCtrl', function($scope, DataStore) {
-  if (DataStore) {
-    
+.controller('AccountCtrl', function($scope, DataStore, Distance) {
+  if (Distance) {
 
-      DataStore.getPlans().then(function(plans){
-        plans.each(function(plan){
-          console.log(plan.get('source'));
-        });
-      });
-    // Create a new instance of that class.
-        
-
-
-    DataStore.getPlan("C1wwO7sWGb").then(function (plan) {
-
-    },
-    function(err) {
-      alert("Error " + err);
-    }
-    );
+  var origin2 = 'Greenwich, England';
+  var destinationB = new google.maps.LatLng(50.087, 14.421);
+   
+    Distance.getDistance(origin2, destinationB);
   }
+
+   
 
   $scope.settings = {
     enableFriends: true
