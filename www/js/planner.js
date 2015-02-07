@@ -47,7 +47,24 @@ angular.module('starter.planner', [])
       return null;
     }
   }
-}) 
+})
+
+.factory('DistanceMatrix', ['$http', function ($http) {
+  //Find the distance matrix using Google API
+
+
+
+
+  return {
+    get: function (sourceDesObj) {
+      var _url = "https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyCFsC6RDGPKYR92qRl6IpR5znr5PUCkRjM&origins="+sourceDesObj.sourcename+"&destinations="+sourceDesObj.destinationname+"&mode=driving&language=en-gb";
+
+      //var _url = 'https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyCFsC6RDGPKYR92qRl6IpR5znr5PUCkRjM&origins=Vancouver+BC|Seattle&destinations=San+Francisco|Victoria+BC&mode=bicycling&language=fr-FR';
+      
+      return $http.get(_url);
+    }
+  }
+}]) 
 
 .controller('PlannerCtrl', function($scope, Planner) {
   $scope.plans = Planner.all();
@@ -59,9 +76,18 @@ angular.module('starter.planner', [])
 })
 
 
-.controller('PlannerEditCtrl', function($scope, $stateParams, Planner) {
+.controller('PlannerEditCtrl', function($scope, $stateParams, DistanceMatrix, Planner) {
+  //Store the source and destination data entered by user
+  $scope.planSourceDes = {};
+  $scope.distanceMatRes = {};
+
   $scope.plan = Planner.get($stateParams.planId);
   $scope.message = 'hello';
-})
 
-;
+  //Get distance details  when the user submits the plan form
+  $scope.createPlan = function() {
+    DistanceMatrix.get($scope.planSourceDes).then(function (res) {
+      $scope.distanceMatRes = res;
+    });
+  };  
+});
