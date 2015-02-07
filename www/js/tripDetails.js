@@ -83,9 +83,42 @@ angular.module('starter.tripDetails', [])
 
 
 })
-.controller('TripDetailsCtrl', ['$scope', '$http', 'DistanceServiceMatrix', 'Cost', 'DataStore','$stateParams',function ($scope, $http, DistanceServiceMatrix, Cost, DataStore, $stateParams) {
+.service('Geoencoding', ['$q', function ($q) {
+	var deferred;
+
+	//Return the lat long of a particular string
+	this.getLatLong = function (placeStr) {
+		var geocoder;
+		var address = placeStr;
+
+		deferred = $q.defer();
+
+		geocoder = new google.maps.Geocoder();
+		geocoder.geocode( { 'address': address}, function(results, status) {
+	    if (status == google.maps.GeocoderStatus.OK) {
+	      /*map.setCenter(results[0].geometry.location);
+	      var marker = new google.maps.Marker({
+	          map: map,
+	          position: results[0].geometry.location
+	      });*/
+				console.log(results[0].geometry.location);
+				deferred.resolve(results[0].geometry.location);
+	    } else {
+	       deferred.reject(status);
+	    }
+	  });
+
+	  return deferred.promise;
+
+	};
+
+}])
+.controller('TripDetailsCtrl', ['$scope', '$http', 'DistanceServiceMatrix', 'Cost', 'DataStore','$stateParams', 'Geoencoding', function ($scope, $http, DistanceServiceMatrix, Cost, DataStore, $stateParams, Geoencoding) {
 
 	$scope.matrixData;
+	$scope.latVal;
+	$scope.longVal;
+
 	var _parsedData,
 			_matrixItems = [];
 
@@ -119,6 +152,12 @@ angular.module('starter.tripDetails', [])
 		_inputs.source = trip.get('source');
 		_inputs.destination = trip.get('destination');
 
+		///Code to Move later - Geoencoding conversion
+		Geoencoding.getLatLong(_inputs.destination).then(function (latLong) {
+			$scope.latVal = latLong.k;
+			$scope.longVal = latLong.D;
+		});
+
 		DistanceServiceMatrix.calculateDistances(_inputs).then(function (response) {
 		//Parse the response data to pass it to template
 			
@@ -128,4 +167,6 @@ angular.module('starter.tripDetails', [])
 		});
 
 	});
+
+
 }]);
