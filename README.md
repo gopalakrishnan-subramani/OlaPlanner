@@ -1,2 +1,0 @@
-# OlaPlanner
-OlaPlanner  OlaHack
