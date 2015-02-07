@@ -5,7 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.locations', 'starter.planner', 
+                          'starter.krish'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -67,24 +68,36 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
-  .state('tab.friends', {
-      url: '/friends',
+  .state('tab.planner', {
+      url: '/planner',
       views: {
-        'tab-friends': {
-          templateUrl: 'templates/tab-friends.html',
-          controller: 'FriendsCtrl'
+        'tab-planner': {
+          templateUrl: 'templates/tab-planner.html',
+          controller: 'PlannerCtrl'
         }
       }
     })
-    .state('tab.friend-detail', {
-      url: '/friend/:friendId',
+
+    .state('tab.plan-new', {
+      url: '/planner/new',
       views: {
-        'tab-friends': {
-          templateUrl: 'templates/friend-detail.html',
-          controller: 'FriendDetailCtrl'
+        'tab-planner': {
+          templateUrl: 'templates/planner-edit.html',
+          controller: 'PlannerEditCtrl'
         }
       }
     })
+    
+    .state('tab.plan-detail', {
+      url: '/planner/:planId',
+      views: {
+        'tab-planner': {
+          templateUrl: 'templates/planner-detail.html',
+          controller: 'PlannerDetailsCtrl'
+        }
+      }
+    })
+
 
   .state('tab.account', {
     url: '/account',

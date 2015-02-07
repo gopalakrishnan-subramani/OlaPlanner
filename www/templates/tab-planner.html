@@ -1,0 +1,11 @@
+<ion-view view-title="Planner">
+  <ion-content>
+  	<a href="#tab/planner/new">New Plan</a>
+    <ion-list>
+      <ion-item class="item-avatar" ng-repeat="plan in plans" type="item-text-wrap" href="#/tab/planner/{{plan.id}}">
+        <img ng-src="{{plan.face}}">
+        <h2>{{plan.name}}</h2>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
