@@ -1,22 +1,5 @@
 angular.module('starter.planner', [])
- 
 
-.factory('DistanceMatrix', ['$http', function ($http) {
-  //Find the distance matrix using Google API
-
-
-
-
-  return {
-    get: function (sourceDesObj) {
-      var _url = "https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyCFsC6RDGPKYR92qRl6IpR5znr5PUCkRjM&origins="+sourceDesObj.sourcename+"&destinations="+sourceDesObj.destinationname+"&mode=driving&language=en-gb";
-
-      //var _url = 'https://maps.googleapis.com/maps/api/distancematrix/json?key=AIzaSyCFsC6RDGPKYR92qRl6IpR5znr5PUCkRjM&origins=Vancouver+BC|Seattle&destinations=San+Francisco|Victoria+BC&mode=bicycling&language=fr-FR';
-      
-      return $http.get(_url);
-    }
-  }
-}]) 
 
 .controller('PlannerCtrl', function($scope, DataStore) {
    

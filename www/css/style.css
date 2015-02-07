@@ -24,3 +24,15 @@ ul#tripD a:hover {
 ul#tripD li {
     display: inline;
 }
+
+
+#gmaps {
+    width: 450px;
+    height: 450px;
+}
+
+
+.gmaps {
+    width: 450px;
+    height: 450px;
+}
