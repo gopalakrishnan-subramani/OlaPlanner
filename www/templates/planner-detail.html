@@ -25,6 +25,7 @@ The Friends service returns an array of friend data
   		<input type="text" ng-model="data.name"  ng-change="nameChanged()"/>
   	 
 
+      RS {{amount}}
 
     <h3>Trips</h3>
 
@@ -37,7 +38,8 @@ The Friends service returns an array of friend data
       <ion-item class="item-thumbnail-left" ng-repeat="trip in trips.models">
          
          <a href="#/tab/planner/trip/{{plan.id}}/{{trip.id}}">
-          <h2>{{trip.get('source')}} --> {{trip.get('destination')}}</h2>
+          <h2>{{trip.get('source')}} --> {{trip.get('destination')}}</h2> <br />
+          {{trip.get('distance')}} || {{trip.get('duration')}}
          </a>
     
           <button ng-click="editTrip(trip.id)">Edit</button>

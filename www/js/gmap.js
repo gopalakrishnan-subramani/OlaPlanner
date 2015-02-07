@@ -13,7 +13,7 @@ angular.module('starter.gmap', [])
         
         // map config
         var mapOptions = {
-            center: new google.maps.LatLng(50, 2),
+            //center: new google.maps.LatLng(50, 2),
             zoom: 4,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             scrollwheel: false

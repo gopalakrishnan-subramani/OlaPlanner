@@ -3,10 +3,13 @@ angular.module('starter.krish', [])
 .controller('AccountCtrl', function($scope, DataStore,Distance, Direction) {
   if (Distance) {
 
-  var origin2 = 'Greenwich, England';
-  var destinationB = new google.maps.LatLng(50.087, 14.421);
-   
-   // Distance.getDistance(origin2, destinationB);
+  var origin = 'RBI Layout, Bangalore';
+  //var destination = new google.maps.LatLng(50.087, 14.421);
+   var destination = "HSR Layout, Bangalore";
+
+    Distance.getDistance(origin, destination).then(function(results){
+      alert(results.length);
+    });
   }
 
   if (Direction) {
@@ -21,7 +24,29 @@ angular.module('starter.krish', [])
 
   $scope.onMapReady = function(map) {
      
+        var geocoder = new google.maps.Geocoder();
+        
+          var address = "RBI Layout, Bangalore";
 
+          geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              map.setCenter(results[0].geometry.location);
+              alert(JSON.stringify(results[0].geometry.location));
+              var marker = new google.maps.Marker({
+                  map: map,
+                  position: results[0].geometry.location
+              });
+            } else {
+              alert('Geocode was not successful for the following reason: ' + status);
+            }
+          });
+
+
+
+
+
+        //map.setCenter(new google.maps.LatLng(12.9667, 77.5667));
+            
         var markers = [];
         
         // place a marker
@@ -52,11 +77,10 @@ angular.module('starter.krish', [])
         }
         
         
-        setMarker(map, new google.maps.LatLng(51.508515, -0.125487), 'London', 'Just some content');
-        setMarker(map, new google.maps.LatLng(52.370216, 4.895168), 'Amsterdam', 'More content');
-        setMarker(map, new google.maps.LatLng(48.856614, 2.352222), 'Paris', 'Text here');
+        //setMarker(map, new google.maps.LatLng(12.9667, 77.5667), 'Bangalore', 'Just some content');
+       // setMarker(map, new google.maps.LatLng(12.8879878, 77.58181209999998), 'RBI Layout', 'More content');
+        //setMarker(map, new google.maps.LatLng(48.856614, 2.352222), 'Paris', 'Text here');
     
-
   };
     
      
