@@ -37,12 +37,11 @@ angular.module('starter.database', [])
             success: function(results) {
               var trips = new TripCollection();
 
-              alert("Successfully retrieved " + results.length + " scores.");
+            
               // Do something with the returned Parse.Object values
               for (var i = 0; i < results.length; i++) {
                 var object = results[i];
                 trips.add(object);
-                alert(object.id + ' - ' + object.get('source'));
               }
 
               return deferred.resolve(trips);
@@ -83,8 +82,7 @@ angular.module('starter.database', [])
 
             query.get(id, {
                   success: function(plan) {
-                    alert('got the document ' + plan.get('source') + ' ' + plan.get('destination'));
-
+               
                     // The object was retrieved successfully.
                     return deferred.resolve(plan);
                   },
@@ -127,7 +125,7 @@ angular.module('starter.database', [])
 
             query.get(id, {
                   success: function(plan) {
-                    alert('got the document ' + plan.get('source') + ' ' + plan.get('destination'));
+                   
 
                     // The object was retrieved successfully.
                     return deferred.resolve(plan);

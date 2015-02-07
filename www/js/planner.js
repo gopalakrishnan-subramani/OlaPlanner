@@ -83,14 +83,14 @@ angular.module('starter.planner', [])
 
   $scope.plan = plan;
 
-  alert($stateParams.planId);
+
 
   if (!$stateParams.planId) {
     console.log('new plan');
     $scope.plan = DataStore.newPlan();
   } else {
     DataStore.getPlan($stateParams.planId).then(function(plan){
-      alert('got plan ' + $stateParams.planId);
+       
       $scope.plan = plan;
       $scope.data = {name: plan.get('name')};
 
