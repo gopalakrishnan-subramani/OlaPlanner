@@ -10,16 +10,16 @@ angular.module('starter.krish', [])
     Distance.getDistance(origin, destination).then(function(results){
       alert(results.length);
     });
-  }
+  } 
 
-  if (Direction) {
-    //var origin2 = 'Greenwich, England';
-   // var destinationB = new google.maps.LatLng(50.087, 14.421);
-   var origin = "RBI Layout, Bangalore";
-   var destination = "Konanakunte, Bangalore";
-     
-      //Direction.getDirection(origin, destination);
-  }
+  var places = [
+                  {name: 'Railway Station, Bangalore', plannedAt: new Date(2015, 2, 8, 8, 0)},
+                  {name: 'Airport, Bangalore', plannedAt: new Date(2015, 2, 8, 11, 0)}
+              ];
+
+    _.each(places, function(place) {
+      
+    });
 
 
   $scope.onMapReady = function(map) {
@@ -31,7 +31,7 @@ angular.module('starter.krish', [])
           geocoder.geocode( { 'address': address}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
               map.setCenter(results[0].geometry.location);
-              alert(JSON.stringify(results[0].geometry.location));
+              //alert(JSON.stringify(results[0].geometry.location));
               var marker = new google.maps.Marker({
                   map: map,
                   position: results[0].geometry.location

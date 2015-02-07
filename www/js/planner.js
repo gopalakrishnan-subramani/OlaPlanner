@@ -38,7 +38,7 @@ angular.module('starter.planner', [])
   $scope.amount = null;
 
 
-  $scope.items = [{title:'Plan1', description:'place-to-place'}];
+
 
 
   function refreshTrip() {
@@ -130,7 +130,8 @@ angular.module('starter.planner', [])
      var data = {
         source: trip.get('source'),
         destination: trip.get('destination'),
-        planned_hours: trip.get('planned_hours')
+        planned_hours: trip.get('planned_hours'),
+        plannedAt: trip.get('plannedAt')
      };
 
      $scope.data = data;
@@ -162,6 +163,11 @@ angular.module('starter.planner', [])
         if (data) {
           trip.set('source', data.source);
           trip.set('destination', data.destination);
+
+
+          trip.set('plannedAt', data.plannedAt);
+
+           
 
           try {
                trip.set('planned_hours', parseFloat(data.planned_hours));
