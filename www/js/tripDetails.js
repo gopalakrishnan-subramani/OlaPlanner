@@ -55,6 +55,10 @@ angular.module('starter.tripDetails', [])
 	}
 })
 .service('PlacesNearBy', function ($http, $q) {
+	//Direction
+	var directionsDisplay = new google.maps.DirectionsRenderer();
+	var directionsService = new google.maps.DirectionsService();
+
 	//Find places nearby for a source and destination
 	var _hotels,
 			_hospitals,
@@ -63,7 +67,7 @@ angular.module('starter.tripDetails', [])
 			map,
 			infowindow;
 
-	this.createMap = function (_lat, _long, type) {
+	this.createMap = function (_lat, _long, _inputs) {
 	  var pyrmont = new google.maps.LatLng(_lat, _long);
 
 	  map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -71,11 +75,28 @@ angular.module('starter.tripDetails', [])
 	    zoom: 15
 	  });
 
+	 // directionsDisplay.setMap(map);
+
+	  var directionRequest = {
+	  	origin:_inputs.source,
+      destination:_inputs.destination,
+      travelMode: google.maps.TravelMode.DRIVING
+	  };
+
 	  var request = {
+	  	origin:_inputs.source,
+      destination:_inputs.destination,
+      travelMode: google.maps.TravelMode.DRIVING,
 	    location: pyrmont,
 	    radius: 500,
 	    types: ['bank', 'doctor', 'restaurant', 'pharmacy', 'police']
 	  };
+
+	  /*directionsService.route(directionRequest, function(response, status) {
+	    if (status == google.maps.DirectionsStatus.OK) {
+	      directionsDisplay.setDirections(response);
+	    }
+	  });*/
 
 	  infowindow = new google.maps.InfoWindow();
 	  var service = new google.maps.places.PlacesService(map);
@@ -178,7 +199,7 @@ angular.module('starter.tripDetails', [])
 			$scope.longVal = latLong.D;
 
 			//Create maps
-			PlacesNearBy.createMap(latLong.k, latLong.D, 'hotel');
+			PlacesNearBy.createMap(latLong.k, latLong.D, _inputs);
 
 		});
 
