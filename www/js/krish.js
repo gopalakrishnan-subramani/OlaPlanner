@@ -21,7 +21,7 @@ angular.module('starter.krish', [])
   $scope.friend = Friends.get($stateParams.friendId);
 })
 */
-.controller('AccountCtrl', function($scope, DataStore, Distance) {
+.controller('AccountCtrl', function($scope, DataStore, Distance, Direction) {
   if (Distance) {
 
   var origin2 = 'Greenwich, England';
@@ -30,7 +30,14 @@ angular.module('starter.krish', [])
     Distance.getDistance(origin2, destinationB);
   }
 
-   
+  if (Direction) {
+    //var origin2 = 'Greenwich, England';
+   // var destinationB = new google.maps.LatLng(50.087, 14.421);
+   var origin = "RBI Layout, Bangalore";
+   var destination = "Konanakunte, Bangalore";
+     
+      Direction.getDirection(origin, destination);
+  }
 
   $scope.settings = {
     enableFriends: true

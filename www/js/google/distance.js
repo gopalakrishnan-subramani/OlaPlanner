@@ -1,4 +1,4 @@
-angular.module('starter.google', [])
+angular.module('starter.google.distance', [])
 .service('Distance', function ($http, $q) {
         
 
