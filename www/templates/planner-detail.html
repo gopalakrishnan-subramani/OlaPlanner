@@ -27,19 +27,21 @@ The Friends service returns an array of friend data
   	
 
     <h3>Trips</h3>
+
+
    
-   <ion-list>
-    <!-- href="#/tab/planner/trip/{{plan.id}}/{{trip.id}}" -->
-
-      <ion-item class="item-avatar" ng-repeat="trip in trips.models" type="item-text-wrap" 
-     
-      ng-click="editTrip(trip.id)"
-      >
+   <ion-list show-delete="shouldShowDelete"
+          show-reorder="shouldShowReorder"
+          can-swipe="listCanSwipe">
+    
+      <ion-item class="item-thumbnail-left" ng-repeat="trip in trips.models">
          
-        <h2>{{trip.get('source')}} --> {{trip.get('destination')}}</h2>
-
-        <button href="#" ng-click="editTrip(trip.id)">Edit</button>
-
+         <a href="#/tab/planner/trip/{{plan.id}}/{{trip.id}}">
+          <h2>{{trip.get('source')}} --> {{trip.get('destination')}}</h2>
+         </a>
+    
+          <button ng-click="editTrip(trip.id)">Edit</button>
+  
       </ion-item>
     </ion-list>
 

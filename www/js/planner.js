@@ -84,6 +84,7 @@ angular.module('starter.planner', [])
   $scope.plan = plan;
 
 
+  $scope.items = [{title:'Plan1', description:'place-to-place'}];
 
   if (!$stateParams.planId) {
     console.log('new plan');
