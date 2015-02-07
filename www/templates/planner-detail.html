@@ -11,6 +11,9 @@ The Friends service returns an array of friend data
  	<span>Destination</span>
  	<input type="text" ng-model="data.destination">
 
+  <span>Time</span>
+  <input type="text" ng-model="data.planned_hours">
+
  	<span>Date</span>
  	<input type="date"> 	 
 </script>
@@ -25,7 +28,9 @@ The Friends service returns an array of friend data
   		<input type="text" ng-model="data.name"  ng-change="nameChanged()"/>
   	 
 
-      RS {{amount}}
+      Rental: RS {{amount}} <br />
+      Wait time: RS {{wait_time_amount}} <br />
+      Total: RS {{total}}
 
     <h3>Trips</h3>
 
@@ -35,11 +40,13 @@ The Friends service returns an array of friend data
           show-reorder="shouldShowReorder"
           can-swipe="listCanSwipe">
     
-      <ion-item class="item-thumbnail-left" ng-repeat="trip in trips.models">
+      <ion-item   ng-repeat="trip in trips.models">
          
          <a href="#/tab/planner/trip/{{plan.id}}/{{trip.id}}">
           <h2>{{trip.get('source')}} --> {{trip.get('destination')}}</h2> <br />
-          {{trip.get('distance')}} || {{trip.get('duration')}}
+          {{trip.get('distance')}} || {{trip.get('duration')}} <br />
+
+          RS {{trip.get('amount')}} <span ng-if="trip.get('wait_time')"> Wait Time: RS {{trip.get('wait_time')}}</span>
          </a>
     
           <button ng-click="editTrip(trip.id)">Edit</button>
