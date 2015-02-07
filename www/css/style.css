@@ -23,4 +23,5 @@ ul#tripD a:hover {
 
 ul#tripD li {
     display: inline;
+    width: 100%;
 }
