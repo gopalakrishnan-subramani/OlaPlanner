@@ -54,14 +54,43 @@ angular.module('starter.tripDetails', [])
 		return _cost;
 	}
 })
+.service('PlacesNearBy', function ($http, $q) {
+	//Find places nearby for a source and destination
+	var _hotels,
+			_hospitals,
+			_police,
+			_atms;
+
+	function initialize() {
+
+	}
+
+	function callback(results, status) {
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+})
 .controller('TripDetailsCtrl', ['$scope', '$http', 'DistanceServiceMatrix', 'Cost', 'DataStore','$stateParams',function ($scope, $http, DistanceServiceMatrix, Cost, DataStore, $stateParams) {
 
 	$scope.matrixData;
 	var _parsedData,
 			_matrixItems = [];
 
-	var _planId = $stateParams.planId;
-	var _tripId = $stateParams.tripId;
+	$scope._planId = $stateParams.planId;
+	$scope._tripId = $stateParams.tripId;
 
 	//Hard Coding for now Source and Destination
 	var _inputs = {
@@ -86,7 +115,7 @@ angular.module('starter.tripDetails', [])
 		return _matrixItems;
 	}
 
-	DataStore.getTrip(_tripId).then(function (trip) {
+	DataStore.getTrip($scope._tripId).then(function (trip) {
 		_inputs.source = trip.get('source');
 		_inputs.destination = trip.get('destination');
 

@@ -21,10 +21,18 @@
 
   	 <!-- TABS -->
 		<ul id="tripD" style="margin-top:40px;">
-		<li><a href="#">Hotels</a></li>
+		<li><a href="#/planner/trip/{{_planId}}/{{_tripId}}/hotels">Hotels</a></li>
 		<li><a href="#">Police Stattions</a></li>
 		<li><a href="#">Hospitals</a></li>
 		<li><a href="#">Atms</a></li>
 		</ul>
+
+    <!-- MAPs for different Categories -->
+    <div id="map-canvas"></div>
+    <div id="results">
+      <h2>Results</h2>
+      <ul id="places"></ul>
+      <button id="more">More results</button>
+    </div>
   </ion-content>  
 </ion-view>
