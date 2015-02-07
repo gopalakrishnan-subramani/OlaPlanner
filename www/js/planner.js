@@ -2,11 +2,23 @@ angular.module('starter.planner', [])
 
 
 .controller('PlannerCtrl', function($scope, DataStore) {
-   
-  DataStore.getPlans().then(function(plans){
-    $scope.plans = plans;
-  });
+  console.log('refresh plans');
 
+    function refresh() {
+        DataStore.getPlans().then(function(plans){
+           $scope.plans = plans;
+        });
+    }
+    
+   $scope.$on( "$ionicView.enter", function( scopes, states ) {
+            //if( states.fromCache && states.stateName == "tab.tabAList" ) {
+            //    reloadItems();
+           // }
+
+           refresh();
+
+          // alert('helo');
+        });
 })
 
 
@@ -119,6 +131,11 @@ angular.module('starter.planner', [])
             success: function(trip) {
               
               console.log('saved successfully ' + trip.id);
+
+              DataStore.getTripsByPlan($scope.plan.id).then(function(trips){
+               $scope.trips = trips;
+              });
+
             },
 
             error: function(error) {
