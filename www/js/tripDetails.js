@@ -35,18 +35,39 @@ angular.module('starter.tripDetails', [])
 	  return deferred.promise;
 	}
 })
-.controller('TripDetailsCtrl', ['$scope', '$http', 'DistanceServiceMatrix', function ($scope, $http, DistanceServiceMatrix) {
+.service('Cost', function () {
+	this.getCost = function (distance) {
+		var _km = distance.split(" ")[0];
+		
+		//Replace ',' from 1,234 like strings
+		_km = _km.replace(/\,/g, "");
+
+		var _remainKm = _km - 10;
+		var _cost;
+
+		if ( _remainKm > 0 ) {
+			_cost = 100 + parseInt(_remainKm) * 10;
+		} else {
+			_cost = 100;
+		}
+
+		return _cost;
+	}
+})
+.controller('TripDetailsCtrl', ['$scope', '$http', 'DistanceServiceMatrix', 'Cost', 'DataStore','$stateParams',function ($scope, $http, DistanceServiceMatrix, Cost, DataStore, $stateParams) {
 
 	$scope.matrixData;
+	var _parsedData,
+			_matrixItems = [];
+
+	var _planId = $stateParams.planId;
+	var _tripId = $stateParams.tripId;
 
 	//Hard Coding for now Source and Destination
 	var _inputs = {
-		source: "bangalore",
-		destination: "mysore"
+		source: "",
+		destination: ""
 	};
-
-	var _parsedData,
-			_matrixItems = [];
 
 	//Parse JSON response coming from service
 	function parseResponse (response) {
@@ -56,19 +77,26 @@ angular.module('starter.tripDetails', [])
 		for (var i = 0; i < length; i++) {
 			_elements = _rows[i]["elements"];
 			for (var j = 0; j < _elements.length; j ++) {
+				//Add the cost aspect
+				_elements[j]["cost"] = Cost.getCost(_elements[j]["distance"]["text"]);
 				_matrixItems.push(_elements[j]);				
 			}
 		}
 
-		$scope.matrixData = _matrixItems;
-		console.log($scope.matrixData);
+		return _matrixItems;
 	}
 
-	DistanceServiceMatrix.calculateDistances(_inputs).then(function (response) {
-		//Parse the response data to pass it to template
-		parseResponse (response);
-	}, function (reason) {
-		console.log(reason);
-	});
+	DataStore.getTrip(_tripId).then(function (trip) {
+		_inputs.source = trip.get('source');
+		_inputs.destination = trip.get('destination');
 
+		DistanceServiceMatrix.calculateDistances(_inputs).then(function (response) {
+		//Parse the response data to pass it to template
+			
+			$scope.matrixData = parseResponse (response);
+		}, function (reason) {
+			console.log(reason);
+		});
+
+	});
 }]);
