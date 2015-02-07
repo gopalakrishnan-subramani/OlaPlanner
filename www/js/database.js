@@ -27,7 +27,37 @@ angular.module('starter.database', [])
           return new Trip();
         }
 
-        this.getTrips = function(planId) {
+        this.getTripsByPlan = function(planId) {
+          var deferred = $q.defer();
+          var query = new Parse.Query(Trip);
+
+          query.equalTo("planId", planId);
+
+          query.find({
+            success: function(results) {
+              var trips = new TripCollection();
+
+              alert("Successfully retrieved " + results.length + " scores.");
+              // Do something with the returned Parse.Object values
+              for (var i = 0; i < results.length; i++) {
+                var object = results[i];
+                trips.add(object);
+                alert(object.id + ' - ' + object.get('source'));
+              }
+
+              return deferred.resolve(trips);
+            },
+            error: function(error) {
+              alert("Error: " + error.code + " " + error.message);
+              return deferred.reject(error);
+            }
+          });
+
+          return deferred.promise;
+
+        };
+
+        this.getTrips = function() {
           var deferred = $q.defer();
           //FIXME: Add planId for filtering
           var collection = new TripCollection();
@@ -43,6 +73,7 @@ angular.module('starter.database', [])
 
           return deferred.promise;
         };
+
 
 
         this.getTrip = function(id){
@@ -66,7 +97,6 @@ angular.module('starter.database', [])
            return deferred.promise;
       };
 
-
         this.newPlan = function() {
           return new Plan();
         };
@@ -74,7 +104,6 @@ angular.module('starter.database', [])
         this.getPlans = function () {
           var deferred = $q.defer();
              var collection = new PlanCollection();
-
              
                 collection.fetch({
                   success: function(collection) {

@@ -9,19 +9,37 @@ The Friends service returns an array of friend data
 	<span>Source</span>
  	<input type="text" ng-model="data.source">
  	<span>Destination</span>
- 	<input type="text" ng-model="data.destination"> 	 
+ 	<input type="text" ng-model="data.destination">
+
+ 	<span>Date</span>
+ 	<input type="date"> 	 
 </script>
 
 <ion-view view-title="{{plan.name}}">
 
   <ion-content class="padding">
-  	<button href="#" ng-click="addTrip()">Add Trip</button>
+
+  	<button href="#" ng-click="editTrip()">Add Trip</button>
+  	<br />
+  		<span>Name</span>
+  		<input type="text" ng-model="data.name"  ng-change="nameChanged()"/>
+  	 
+  	
+
     <h3>Trips</h3>
    
    <ion-list>
-      <ion-item class="item-avatar" ng-repeat="trip in trips" type="item-text-wrap" href="#/tab/planner/trip/{{plan.id}}/{{trip.id}}">
+    <!-- href="#/tab/planner/trip/{{plan.id}}/{{trip.id}}" -->
+
+      <ion-item class="item-avatar" ng-repeat="trip in trips.models" type="item-text-wrap" 
+     
+      ng-click="editTrip(trip.id)"
+      >
          
-        <h2>{{trip.source}} --> {{trip.destination}}</h2>
+        <h2>{{trip.get('source')}} --> {{trip.get('destination')}}</h2>
+
+        <button href="#" ng-click="editTrip(trip.id)">Edit</button>
+
       </ion-item>
     </ion-list>
 
