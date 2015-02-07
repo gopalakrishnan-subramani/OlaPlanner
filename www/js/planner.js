@@ -10,6 +10,11 @@ angular.module('starter.planner', [])
         });
     }
 
+  $scope.deletePlan = function(plan){
+    plan.destroy();
+    refresh();
+  };
+
    $scope.$on( "$ionicView.enter", function( scopes, states ) {
             //if( states.fromCache && states.stateName == "tab.tabAList" ) {
             //    reloadItems();
@@ -41,14 +46,26 @@ angular.module('starter.planner', [])
         $scope.trips = trips;
         
         var amount = 0;
+        var wait_time_amount = 0;
+        var total = 0;
 
         trips.each(function(trip){
           if (trip.get('distance_value')) {
             amount += (trip.get('distance_value') / 1000.0) * 10.0;
+            trip.set('amount', ((trip.get('distance_value') / 1000.0) * 10.0).toFixed(2));
+
+            if (trip.get('planned_hours') && trip.get('planned_hours') <= .5) {
+              trip.set('wait_time', trip.get('planned_hours') * 120);
+              wait_time_amount += trip.get('planned_hours') * 120;
+            }
           }
         });
 
         $scope.amount = amount.toFixed(2);
+
+        $scope.wait_time_amount = wait_time_amount.toFixed(2);
+
+        $scope.total = (amount + wait_time_amount).toFixed(2);
 
       });
   }
@@ -112,7 +129,8 @@ angular.module('starter.planner', [])
      // An elaborate, custom popup
      var data = {
         source: trip.get('source'),
-        destination: trip.get('destination')
+        destination: trip.get('destination'),
+        planned_hours: trip.get('planned_hours')
      };
 
      $scope.data = data;
@@ -144,6 +162,14 @@ angular.module('starter.planner', [])
         if (data) {
           trip.set('source', data.source);
           trip.set('destination', data.destination);
+
+          try {
+               trip.set('planned_hours', parseFloat(data.planned_hours));
+          }catch(ex) {
+
+          }
+         
+
           if (!trip.get('planId')) {
             trip.set('planId', plan.id.toString());
           }
@@ -181,6 +207,11 @@ angular.module('starter.planner', [])
         console.log('Tapped!', data);
       });
   }
+
+  $scope.deleteTrip = function(trip){
+      trip.destroy();
+      refreshTrip();
+  };
 
   $scope.editTrip = function(id) {
      //FIXME: handle datepicker

@@ -2,9 +2,11 @@
   <ion-content>
   	<a href="#tab/planner/new">New Plan</a>
     <ion-list>
-      <ion-item class="item-avatar" ng-repeat="plan in plans.models" type="item-text-wrap" href="#/tab/planner/{{plan.id}}">
+      <ion-item class="item-avatar" ng-repeat="plan in plans.models" type="item-text-wrap" >
          
-        <h2>{{plan.get('name')}}</h2>
+        <a href="#/tab/planner/{{plan.id}}"><h2>{{plan.get('name')}}</h2></a>
+        <br />
+        <button ng-click="deletePlan(plan)">Delete</button>
       </ion-item>
     </ion-list>
   </ion-content>
