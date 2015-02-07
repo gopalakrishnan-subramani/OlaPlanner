@@ -10,6 +10,11 @@ angular.module('starter.planner', [])
         });
     }
 
+  $scope.deletePlan = function(plan){
+    plan.destroy();
+    refresh();
+  };
+
    $scope.$on( "$ionicView.enter", function( scopes, states ) {
             //if( states.fromCache && states.stateName == "tab.tabAList" ) {
             //    reloadItems();
@@ -202,6 +207,11 @@ angular.module('starter.planner', [])
         console.log('Tapped!', data);
       });
   }
+
+  $scope.deleteTrip = function(trip){
+      trip.destroy();
+      refreshTrip();
+  };
 
   $scope.editTrip = function(id) {
      //FIXME: handle datepicker
