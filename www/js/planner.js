@@ -332,7 +332,7 @@ angular.module('starter.planner', [])
 
       if (index > -1 ) {
         trips.splice(index, 1);
-        
+
         $scope.plan.set('trips', trips);
       }
 
@@ -348,7 +348,8 @@ angular.module('starter.planner', [])
      //FIXME: handle datepicker
      //when id is null, new trip
      var trip = null;
-
+      
+     
      if (!id) {
         trip = new DataStore.newTrip();
         manageTrip($scope.plan, trip);
