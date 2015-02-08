@@ -60,7 +60,7 @@ The Friends service returns an array of friend data
               show-reorder="shouldShowReorder"
               can-swipe="listCanSwipe">
         
-          <ion-item ng-repeat="trip in trips.models">
+          <ion-item ng-repeat="trip in trips">
              
              <a href="#/tab/planner/trip/{{plan.id}}/{{trip.id}}">
               <h2>{{trip.get('BookedAt')}}<br/>{{trip.get('source')}} --> {{trip.get('destination')}}</h2> <br />
