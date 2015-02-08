@@ -16,15 +16,18 @@ The Friends service returns an array of friend data
   <span>Date</span>
  	<input type="date" ng-model="data.plannedAt"> 	 
    
-  <select ng-options="hour for hour in hours" 
-  ng-model="data.hour"  width="50"/>
+   <span>Hour</span>
+  
+  <select ng-options="h as h for h in hours track by h"
+  ng-model="data.hour"  width="50">
+     
+  </select>
 
-  <select ng-options="minute for minute in minutes" 
-  ng-model="data.minute" width="50" />
-  
-  
-
-  
+  <span>Minute</span>
+  <select ng-options="m as m for m in minutes track by m"
+  ng-model="data.minute"  width="50">
+     
+  </select>
 
 </script>
 

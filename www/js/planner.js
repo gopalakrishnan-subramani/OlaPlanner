@@ -159,6 +159,16 @@ angular.module('starter.planner', [])
         plannedAt: trip.get('plannedAt')
      };
 
+     if (trip.get('hour')) {
+        data.hour =   trip.get('hour');
+     }
+
+
+     if (trip.get('minute')) {
+        data.minute =   trip.get('minute');
+     }
+      
+
      $scope.data = data;
 
       var tripEditPopup = $ionicPopup.show({
@@ -192,7 +202,9 @@ angular.module('starter.planner', [])
 
           trip.set('plannedAt', data.plannedAt);
 
-           
+          trip.set('hour', data.hour);
+          
+          trip.set('minute', data.minute);
 
           try {
                trip.set('planned_hours', parseFloat(data.planned_hours));
