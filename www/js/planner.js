@@ -53,12 +53,20 @@ angular.module('starter.planner', [])
 
   function refreshTrip() {
     DataStore.getTripsByPlan($scope.plan.id).then(function(trips){
-        $scope.trips = trips;
+        //$scope.trips = trips;
         
         var amount = 0;
         var wait_time_amount = 0;
         var total = 0;
 
+        var myTrips = [];
+
+        Parse._.each($scope.plan.get('trips'), function(tripId){
+            myTrips.push(trips.get(tripId));
+        });
+
+        
+        
         trips.each(function(trip){
           if (trip.get('distance_value')) {
             amount += (trip.get('distance_value') / 1000.0) * 10.0;
@@ -71,12 +79,6 @@ angular.module('starter.planner', [])
 
             //get date from string
             try {
-             // console.log('planned ', trip.get('plannedAt'));
-
-              //var dateBooked = Date.parse(trip.get('plannedAt'));
-
-              //console.log('dateBooked ', dateBooked);
-              
               trip.set('BookedAt', trip.get('plannedAt').toDateString());
             }catch(ex) {
                console.log('error ', ex);
@@ -84,12 +86,13 @@ angular.module('starter.planner', [])
           }
         });
 
+        //$scope.trips = myTrips;
+        $scope.trips = myTrips;
+
+
         $scope.amount = amount.toFixed(2);
-
         $scope.wait_time_amount = wait_time_amount.toFixed(2);
-
         $scope.total = (amount + wait_time_amount).toFixed(2);
-
       });
   }
 
@@ -161,6 +164,22 @@ angular.module('starter.planner', [])
   });
      */     
 
+  function updatePlanTrips() {
+    if ($scope.plan) {
+       
+       $scope.plan.save(null, {
+                success: function(plan) {
+                  
+                  console.log('saved successfully ' + plan.id);
+ 
+                },
+
+              error: function(error) {
+                //alert('error ' + error);
+              }
+            });
+    }
+  }
 
   function manageTrip(plan, trip) {
 
@@ -211,12 +230,8 @@ angular.module('starter.planner', [])
         if (data) {
           trip.set('source', data.source);
           trip.set('destination', data.destination);
-
-
           trip.set('plannedAt', data.plannedAt);
-
           trip.set('hour', data.hour);
-          
           trip.set('minute', data.minute);
 
           try {
@@ -244,7 +259,11 @@ angular.module('starter.planner', [])
                   
                   console.log('saved successfully ' + trip.id);
 
+                  $scope.plan.addUnique('trips', trip.id);
+
+
                  refreshTrip();
+                 updatePlanTrips();
 
                 },
 
@@ -306,7 +325,22 @@ angular.module('starter.planner', [])
 
 
   $scope.deleteTrip = function(trip){
+      var tripId = trip.id;
+      var trips = $scope.plan.get('trips');
+
+      var index = trips.indexOf(tripId);
+
+      if (index > -1 ) {
+        trips.splice(index, 1);
+        
+        $scope.plan.set('trips', trips);
+      }
+
       trip.destroy();
+
+      updatePlanTrips();
+
+      
       refreshTrip();
   };
 
