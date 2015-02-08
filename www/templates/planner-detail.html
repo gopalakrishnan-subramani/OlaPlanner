@@ -12,8 +12,20 @@ The Friends service returns an array of friend data
  	<input type="text" ng-model="data.destination">
   <span>Time</span>
   <input type="text" ng-model="data.planned_hours">
- 	<span>Date</span>
+ 	
+  <span>Date</span>
  	<input type="date" ng-model="data.plannedAt"> 	 
+   
+  <select ng-options="hour for hour in hours" 
+  ng-model="data.hour"  width="50"/>
+
+  <select ng-options="minute for minute in minutes" 
+  ng-model="data.minute" width="50" />
+  
+  
+
+  
+
 </script>
 
 <ion-view view-title="{{plan.attributes.name}}" id="">

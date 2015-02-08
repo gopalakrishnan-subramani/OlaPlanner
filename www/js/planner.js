@@ -41,9 +41,15 @@ angular.module('starter.planner', [])
 
   $scope.amount = null;
 
+  $scope.hours = [];
+  for(i = 0; i < 24; i++) {
+    $scope.hours.push(i);
+  }
 
-
-
+  $scope.minutes = [];
+  for(i = 0; i < 60; i++) {
+    $scope.minutes.push(i);
+  }
 
   function refreshTrip() {
     DataStore.getTripsByPlan($scope.plan.id).then(function(trips){
