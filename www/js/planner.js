@@ -251,6 +251,47 @@ angular.module('starter.planner', [])
       });
   }
 
+  $scope.bookTrip = function(trip){
+    trip.set('booked', true);
+
+     trip.save(null, {
+                success: function(trip) {
+                  
+                  console.log('saved successfully ' + trip.id);
+
+                 refreshTrip();
+
+                },
+
+              error: function(error) {
+                //alert('error ' + error);
+              }
+            });
+
+  };
+
+
+
+  $scope.cancelTrip = function(trip){
+    trip.set('booked', false);
+    
+     trip.save(null, {
+                success: function(trip) {
+                  
+                  console.log('saved successfully ' + trip.id);
+
+                 refreshTrip();
+
+                },
+
+              error: function(error) {
+                //alert('error ' + error);
+              }
+            });
+
+  };
+
+
   $scope.deleteTrip = function(trip){
       trip.destroy();
       refreshTrip();
