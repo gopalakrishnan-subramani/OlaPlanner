@@ -84,7 +84,37 @@ a {
     color: #000;
 }
 .addTripBtn {
-    margin: 5px 0;
-    color: ##373737;
+    margin: 5px 0 10px;
+    color: rgb(198, 73, 48);
     font-weight: bold;
+}
+
+.col-heading {
+    font-weight: bold;
+    color: ;
+}
+
+table.gridtable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 10px;
+}
+table.gridtable th {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
+}
+table.gridtable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
 }

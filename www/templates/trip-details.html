@@ -1,27 +1,23 @@
 <ion-view view-title="{{plan.name}}">
   <ion-content class="padding">
-  	 <h4>Possible Routes</h4>
-     <div>
-  		 <div class="row">
-          <div class="col-25">Distance</div>
-          <div class="col-25">Duration</div>
-          <div class="col-25">Cost</div>
-      </div>
-
-  		<div class="row" ng-repeat="data in matrixData">
-          <div class="col-25">
-            {{data["distance"]["text"]}}
-          </div>
-          <div class="col-25">
-            {{data["duration"]["text"]}}
-          </div>
-          <div class="col-25">
-            {{data["cost"]}}
-          </div>
-      </div>
-    </div>
-     <p> The below map will highlight the followings:</p>
-     <p>'bank', 'doctor', 'restaurant', 'pharmacy', 'police'</p>
+  	 <h4>Route Details</h4>
+      <table class="gridtable">
+      <tr>
+      <th>Distance</th><th>Duration</th><th>Cost</th>
+      </tr>
+      <tr ng-repeat="data in matrixData">
+      <td>{{data["distance"]["text"]}}</td><td>{{data["duration"]["text"]}}</td><td>{{data["cost"]}}</td>
+      </tr>
+      </table>
+     <p>Map will highlight the followings items in this route for your different needs:</p>
+     <p>Bank, Doctor, Restaurant, Pharmacy, Police</p>
+     <!-- <ul>
+      <li>Bank</li>
+      <li>Doctor</li>
+      <li>Restaurant</li>
+      <li>Pharmacy</li>
+      <li>Police</li>
+     </ul> -->
 
     <!-- MAPs for different Categories -->
     <div id="map-canvas"></div>
