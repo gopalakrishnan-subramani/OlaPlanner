@@ -40,7 +40,7 @@ The Friends service returns an array of friend data
         Total: RS {{total}}
       </div>
       <h4>Trips</h4>
-        <button href="#" class="button button-balanced" ng-click="editTrip()">Add Trip</button>
+       <a href="#" class="addTripBtn" ng-click="editTrip()">Add Trip</a>
        <ion-list show-delete="shouldShowDelete"
               show-reorder="shouldShowReorder"
               can-swipe="listCanSwipe">
@@ -48,7 +48,7 @@ The Friends service returns an array of friend data
           <ion-item ng-repeat="trip in trips.models">
              
              <a href="#/tab/planner/trip/{{plan.id}}/{{trip.id}}">
-              <h2>{{trip.get('source')}} --> {{trip.get('destination')}}</h2> <br />
+              <h2>{{trip.get('plannedAt')}}<br/>{{trip.get('source')}} --> {{trip.get('destination')}}</h2> <br />
               {{trip.get('distance')}} || {{trip.get('duration')}} <br />
 
               RS {{trip.get('amount')}} <span ng-if="trip.get('wait_time')"> Wait Time: RS {{trip.get('wait_time')}}</span>
