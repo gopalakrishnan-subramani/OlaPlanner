@@ -68,6 +68,19 @@ angular.module('starter.planner', [])
               trip.set('wait_time', trip.get('planned_hours') * 120);
               wait_time_amount += trip.get('planned_hours') * 120;
             }
+
+            //get date from string
+            try {
+             // console.log('planned ', trip.get('plannedAt'));
+
+              //var dateBooked = Date.parse(trip.get('plannedAt'));
+
+              //console.log('dateBooked ', dateBooked);
+              
+              trip.set('BookedAt', trip.get('plannedAt').toDateString());
+            }catch(ex) {
+               console.log('error ', ex);
+            }
           }
         });
 
@@ -174,7 +187,7 @@ angular.module('starter.planner', [])
       var tripEditPopup = $ionicPopup.show({
         templateUrl: 'tripedit.html',
         title: 'Trip Details',
-        subTitle: 'Please use normal things',
+        subTitle: 'Please provide trip details',
         scope: $scope,
         buttons: [
           { text: 'Cancel' },
