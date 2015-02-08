@@ -33,7 +33,7 @@ angular.module('starter.planner', [])
 
 .controller('PlannerDetailsCtrl', function($scope, $cordovaDatePicker, $stateParams, $ionicPopup, Distance, DataStore, PlaceAutoComplete) {
   var plan = DataStore.newPlan();
-  var data = {name: 'new plan'};
+  var data = {name: ''};
 
   $scope.data = data;
 

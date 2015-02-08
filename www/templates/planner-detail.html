@@ -10,51 +10,47 @@ The Friends service returns an array of friend data
  	<input type="text" id="pac-input" ng-model="data.source">
  	<span>Destination</span>
  	<input type="text" ng-model="data.destination">
-
   <span>Time</span>
   <input type="text" ng-model="data.planned_hours">
-
  	<span>Date</span>
  	<input type="date" ng-model="data.plannedAt"> 	 
 </script>
 
-<ion-view view-title="{{plan.name}}">
-
+<ion-view view-title="{{plan.name}}" id="">
   <ion-content class="padding">
+  		<div class="list">
+        <h4>New Plan</h4>
+        <label class="item item-input">
+          <span class="input-label">Name</span>
+          <input type="text" ng-model="data.name" ng-change="nameChanged()" style="border: 1px solid #ccc; margin-left: 3px;"/>
+        </label>
+      </div>
+      <h4>Total Trip Cost:</h4>
+      <div>
+        Rental: RS {{amount}} <br />
+        Wait time: RS {{wait_time_amount}} <br />
+        Total: RS {{total}}
+      </div>
+      <h4>Trips</h4>
+        <button href="#" class="button button-balanced" ng-click="editTrip()">Add Trip</button>
+       <ion-list show-delete="shouldShowDelete"
+              show-reorder="shouldShowReorder"
+              can-swipe="listCanSwipe">
+        
+          <ion-item ng-repeat="trip in trips.models">
+             
+             <a href="#/tab/planner/trip/{{plan.id}}/{{trip.id}}">
+              <h2>{{trip.get('source')}} --> {{trip.get('destination')}}</h2> <br />
+              {{trip.get('distance')}} || {{trip.get('duration')}} <br />
 
-  	<button href="#" ng-click="editTrip()">Add Trip</button>
-  	<br />
-  		<span>Name</span>
-  		<input type="text" ng-model="data.name"  ng-change="nameChanged()"/>
-  	 
+              RS {{trip.get('amount')}} <span ng-if="trip.get('wait_time')"> Wait Time: RS {{trip.get('wait_time')}}</span>
+             </a>
+        
+              <button ng-click="editTrip(trip.id)">Edit</button>
 
-      Rental: RS {{amount}} <br />
-      Wait time: RS {{wait_time_amount}} <br />
-      Total: RS {{total}}
-
-    <h3>Trips</h3>
-
-
-   
-   <ion-list show-delete="shouldShowDelete"
-          show-reorder="shouldShowReorder"
-          can-swipe="listCanSwipe">
-    
-      <ion-item   ng-repeat="trip in trips.models">
-         
-         <a href="#/tab/planner/trip/{{plan.id}}/{{trip.id}}">
-          <h2>{{trip.get('source')}} --> {{trip.get('destination')}}</h2> <br />
-          {{trip.get('distance')}} || {{trip.get('duration')}} <br />
-
-          RS {{trip.get('amount')}} <span ng-if="trip.get('wait_time')"> Wait Time: RS {{trip.get('wait_time')}}</span>
-         </a>
-    
-          <button ng-click="editTrip(trip.id)">Edit</button>
-
-          <button ng-click="deleteTrip(trip)">Delete</button>
-  
-      </ion-item>
-    </ion-list>
-
+              <button ng-click="deleteTrip(trip)">Delete</button>
+      
+          </ion-item>
+        </ion-list>
   </ion-content>
 </ion-view>
