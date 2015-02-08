@@ -87,6 +87,7 @@ a {
     margin: 5px 0 10px;
     color: rgb(198, 73, 48);
     font-weight: bold;
+    float: right;
 }
 
 .col-heading {
@@ -99,7 +100,7 @@ table.gridtable {
     font-size:11px;
     color:#333333;
     border-width: 1px;
-    border-color: #666666;
+    border-color: rgb(102, 184, 37);
     border-collapse: collapse;
     width: 100%;
     margin-bottom: 10px;
@@ -108,13 +109,22 @@ table.gridtable th {
     border-width: 1px;
     padding: 8px;
     border-style: solid;
-    border-color: #666666;
+    border-color: rgb(102, 184, 37);
     background-color: #dedede;
 }
 table.gridtable td {
     border-width: 1px;
     padding: 8px;
     border-style: solid;
-    border-color: #666666;
+    border-color: rgb(102, 184, 37);
     background-color: #ffffff;
+}
+
+.msg {
+    margin: 5px;
+    color: #ff0000;
+}
+
+.list {
+    margin-bottom: 0 !important;
 }

@@ -38,22 +38,28 @@ The Friends service returns an array of friend data
         <label class="item item-input">
           <span class="input-label">Name</span>
           <input type="text" ng-model="plan_data.name" ng-change="nameChanged()" style="border: 1px solid #ccc; margin-left: 3px;"/>
-
-          
-            
-
         </label>
-
         <p>
-          <span> {{message}} </span>
+          <span class="msg"> {{message | uppercase}} </span>
         </p>
       </div>
       <h4>Total Trip Cost:</h4>
-      <div>
+      <table class="gridtable">
+        <tr>
+        <td>Rental</td><td> Rs.{{amount}}</td>
+        </tr>
+        <tr>
+        <td>Wait Time</td><td> Rs.{{wait_time_amount}}</td>
+        </tr>
+        <tr>
+        <td>Total</td><td> Rs.{{total}}</td>
+        </tr>
+      </table>      
+      <!-- <div>
         Rental: RS {{amount}} <br />
         Wait time: RS {{wait_time_amount}} <br />
         Total: RS {{total}}
-      </div>
+      </div> -->
       <h4>Trips</h4>
        <a href="#" class="addTripBtn" ng-click="editTrip()">Add Trip</a>
        <ion-list show-delete="shouldShowDelete"
@@ -73,8 +79,8 @@ The Friends service returns an array of friend data
 
               <button ng-click="deleteTrip(trip)">Delete</button>
  
-              <button ng-if="trip.attributes.booked" ng-click="cancelTrip(trip)">Cancel My Ride</button>
-              <button ng-if="!trip.attributes.booked" ng-click="bookTrip(trip)">Book My Ride</button>
+              <button ng-if="trip.attributes.booked" ng-click="cancelTrip(trip)">Cancel Ride</button>
+              <button ng-if="!trip.attributes.booked" ng-click="bookTrip(trip)">Book Ride</button>
       
           </ion-item>
         </ion-list>
