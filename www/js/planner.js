@@ -31,11 +31,11 @@ angular.module('starter.planner', [])
 })
 
 
-.controller('PlannerDetailsCtrl', function($scope, $cordovaDatePicker, $stateParams, $ionicPopup, Distance, DataStore, PlaceAutoComplete) {
+.controller('PlannerDetailsCtrl', function($scope, $timeout, $cordovaDatePicker, $stateParams, $ionicPopup, Distance, DataStore, PlaceAutoComplete) {
   var plan = DataStore.newPlan();
-  var data = {name: ''};
+  var plan_data = {name: ''};
 
-  $scope.data = data;
+  $scope.plan_data = plan_data;
 
   $scope.plan = plan;
 
@@ -81,7 +81,7 @@ angular.module('starter.planner', [])
     DataStore.getPlan($stateParams.planId).then(function(plan){
        
       $scope.plan = plan;
-      $scope.data = {name: plan.get('name')};
+      $scope.plan_data = {name: plan.get('name')};
 
       refreshTrip();
        
@@ -94,13 +94,28 @@ angular.module('starter.planner', [])
 
   $scope.nameChanged = function() {
      
-    console.log('name changed', $scope.data.name);
+    console.log('name changed', $scope.plan_data.name);
 
-    $scope.plan.set('name', $scope.data.name);
+    $scope.plan.set('name', $scope.plan_data.name);
 
     $scope.plan.save(null, {
       success: function(plan){
         console.log('saved plan');
+        
+        //$scope.data.name = plan.get('name');
+        $scope.$apply(function () {
+          $scope.plan = plan;
+          $scope.message = 'plan saved...';
+        });
+
+        $timeout(function() {
+          $scope.$apply(function () {
+            $scope.message = '';
+          });
+
+        }, 2000);
+
+
       },
 
       error: function(error) {

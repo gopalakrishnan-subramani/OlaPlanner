@@ -16,14 +16,22 @@ The Friends service returns an array of friend data
  	<input type="date" ng-model="data.plannedAt"> 	 
 </script>
 
-<ion-view view-title="{{plan.name}}" id="">
+<ion-view view-title="{{plan.attributes.name}}" id="">
   <ion-content class="padding">
   		<div class="list">
         <h4>New Plan</h4>
         <label class="item item-input">
           <span class="input-label">Name</span>
-          <input type="text" ng-model="data.name" ng-change="nameChanged()" style="border: 1px solid #ccc; margin-left: 3px;"/>
+          <input type="text" ng-model="plan_data.name" ng-change="nameChanged()" style="border: 1px solid #ccc; margin-left: 3px;"/>
+
+          
+            
+
         </label>
+
+        <p>
+          <span> {{message}} </span>
+        </p>
       </div>
       <h4>Total Trip Cost:</h4>
       <div>
