@@ -159,6 +159,7 @@ angular.module('starter.tripDetails', [])
 	$scope.matrixData;
 	$scope.latVal;
 	$scope.longVal;
+	$scope.carBooked;
 
 	var _parsedData,
 			_matrixItems = [];
@@ -169,7 +170,8 @@ angular.module('starter.tripDetails', [])
 	//Hard Coding for now Source and Destination
 	var _inputs = {
 		source: "",
-		destination: ""
+		destination: "",
+		carBooked: false
 	};
 
  	//Parse JSON response coming from service
@@ -192,6 +194,7 @@ angular.module('starter.tripDetails', [])
 	DataStore.getTrip($scope._tripId).then(function (trip) {
 		_inputs.source = trip.get('source');
 		_inputs.destination = trip.get('destination');
+		$scope.carBooked = trip.get('booked');
 
 		///Code to Move later - Geoencoding conversion
 		Geoencoding.getLatLong(_inputs.destination).then(function (latLong) {

@@ -73,8 +73,8 @@ The Friends service returns an array of friend data
 
               <button ng-click="deleteTrip(trip)">Delete</button>
  
-              <button ng-if="trip.attributes.booked" ng-click="cancelTrip(trip)">Cancel</button>
-              <button ng-if="!trip.attributes.booked" ng-click="bookTrip(trip)">Book</button>
+              <button ng-if="trip.attributes.booked" ng-click="cancelTrip(trip)">Cancel My Ride</button>
+              <button ng-if="!trip.attributes.booked" ng-click="bookTrip(trip)">Book My Ride</button>
       
           </ion-item>
         </ion-list>
