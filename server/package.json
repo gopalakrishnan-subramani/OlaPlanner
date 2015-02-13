@@ -1,0 +1,16 @@
+{
+  "name": "ola-planner",
+  "version": "0.0.1",
+  "description": "ola planner server",
+  "main": "serve.js",
+  "dependencies": {
+    "body-parser": "~1.0.1",
+    "express": "~4.0.0",
+    "mongodb": "^1.4.30"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pulakb",
+  "license": "Private"
+}

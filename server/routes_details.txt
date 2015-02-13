@@ -1,0 +1,35 @@
+//--- PLAN ---------
+
+1. Get all plans for a user (GET)
+		http://localhost:8001/ola/<<user-id>>/plans
+
+2. Create a plan for a user (POST)
+		http://localhost:8001/ola/<<user-id>>/plans
+
+3. Get a single plan detail for a user (GET)
+		http://localhost:8001/ola/<<user-id>>/plans/<<plan-id>>
+
+4. Update details of a plan (PUT)
+		http://localhost:8001/ola/<<user-id>>/plans/<<plan-id>>
+
+5. Delete plan (DELETE)
+		http://localhost:8001/ola/<<user-id>>/plans/<<plan-id>>
+
+//--- TRIP ---------
+
+6. Get detail of a specific trip (GET)
+		http://localhost:8001/ola/<<user-id>>/plans/<<plan-id>>/<<trip-id>>
+
+7. Create a new trip (POST)
+		http://localhost:8001/ola/<<user-id>>/plans/<<plan-id>>/
+
+8. Update a trip (PUT)
+		http://localhost:8001/ola/<<user-id>>/plans/<<plan-id>>/<<trip-id>>
+
+9. Delete a trip (DELETE)
+		http://localhost:8001/ola/<<user-id>>/plans/<<plan-id>>/<<trip-id>>
+
+/** Helpful tuts
+	http://coenraets.org/blog/2012/10/creating-a-rest-api-using-node-js-express-and-mongodb/
+	https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4
+*/

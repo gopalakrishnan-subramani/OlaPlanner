@@ -1,0 +1,52 @@
+[
+	{
+		"user_id": "u001",
+		"password": "salted-password",
+		"email": "pulak@gmail.com",
+		"phone": "8050609024",
+		"created_at": "date-time",
+		"modified_at": "date-time",
+		"plans": [
+			{
+				"plan_id": "p001",
+				"plan_name": "Bangalore",
+				"trips": [
+					{
+						"trip_id": "tr001",
+						"trip_source": "x",
+						"trip_dest": "y",
+						"trip_date": "date-time",
+						"wait_time": "date-time",
+					},
+					{
+						"trip_id": "tr002",
+						"trip_source": "i",
+						"trip_dest": "t",
+						"trip_date": "date-time",
+						"wait_time": "date-time",
+					}
+				]
+			},
+			{
+				"plan_id": "p002",
+				"plan_name": "Mysore",
+				"trips": [
+					{
+						"trip_id": "tr011",
+						"trip_source": "m",
+						"trip_dest": "n",
+						"trip_date": "date-time",
+						"wait_time": "date-time",
+					},
+					{
+						"trip_id": "tr012",
+						"trip_source": "k",
+						"trip_dest": "a",
+						"trip_date": "date-time",
+						"wait_time": "date-time",
+					}
+				] // trip ends
+			}
+		] // plans ends
+	}// user details ends
+]
